@@ -3,7 +3,8 @@ import { Task } from '../../types/Task'
 import { Tabs } from '../../types/Tabs'
 import TodoItem from "./components/TodoItem";
 import TabsGroup from "./components/TabsGroup";
-import {Container, Title, WhiteForm, Input, TodoContainer, SettingsPanel, Tab} from "../../styles/TodoAppStyles";
+import Input from "./components/Input";
+import {Container, Title, WhiteForm, TodoContainer, SettingsPanel, Tab} from "../../styles/TodoAppStyles";
 
 
 const Index: React.FC = () => {
@@ -14,7 +15,7 @@ const Index: React.FC = () => {
     const addTask = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter' && newTask.trim() !== '') {
             const newTaskItem: Task = {
-                id: tasks.length + 1,
+                id: Math.random()  * 2,
                 text: newTask,
                 completed: false,
             };
@@ -57,15 +58,11 @@ const Index: React.FC = () => {
             <div>
                 <Title>todos</Title>
                 <WhiteForm>
-                    <label>
-                        <Input
-                            type="text"
-                            placeholder="What needs to be done?"
-                            value={newTask}
-                            onChange={(e) => setNewTask(e.target.value)}
-                            onKeyDown={addTask}
-                        />
-                    </label>
+                    <Input
+                        value={newTask}
+                        handleInputChange={(e) => setNewTask(e.target.value)}
+                        keyEvent={(e) => addTask(e)}
+                    />
                     <TodoContainer>
                         {filteredTasks.map((task) => (
                             <TodoItem key={task.id} task={task} toggleTask={toggleTask} deleteTask={deleteTask} />

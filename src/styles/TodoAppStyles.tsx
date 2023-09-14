@@ -27,7 +27,7 @@ export const Title = styled.div`
   font-weight: 300;
 `;
 
-export const Input = styled.input`
+export const InputApp = styled.input`
   box-sizing: border-box;
   display: flex;
   gap: 10px;
